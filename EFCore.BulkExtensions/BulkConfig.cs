@@ -12,6 +12,13 @@ namespace EFCore.BulkExtensions;
 public class BulkConfig
 {
     /// <summary>
+    ///     Full path of a table aliased via SYNONYM
+    /// </summary>
+    /// <value>
+    ///     Default value is <c>NULL</c>, Only useful when destination table is a SYNONYM eg. OTHERDB.dbo.SampleTable
+    /// </value>
+    public string? SynonymTablePath { get; set; }
+    /// <summary>
     ///     Makes sure that entites are inserted to Db as ordered in entitiesList.
     /// </summary>
     /// <value>

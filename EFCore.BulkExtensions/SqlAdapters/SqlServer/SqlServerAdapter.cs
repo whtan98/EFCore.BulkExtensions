@@ -191,7 +191,7 @@ public class SqlServerAdapter : ISqlOperationsAdapter
 
             if (keepIdentity && tableInfo.HasIdentity)
             {
-                var sqlSetIdentityInsertTrue = SqlQueryBuilder.SetIdentityInsert(tableInfo.FullTableName, true);
+                var sqlSetIdentityInsertTrue = SqlQueryBuilder.SetIdentityInsert(tableInfo.BulkConfig.SynonymTablePath ?? tableInfo.FullTableName, true);
                 if (isAsync)
                 {
                     await context.Database.OpenConnectionAsync(cancellationToken).ConfigureAwait(false);
@@ -259,7 +259,7 @@ public class SqlServerAdapter : ISqlOperationsAdapter
 
             if (identityInsertIsSet)
             {
-                var sqlSetIdentityInsertFalse = SqlQueryBuilder.SetIdentityInsert(tableInfo.FullTableName, false);
+                var sqlSetIdentityInsertFalse = SqlQueryBuilder.SetIdentityInsert(tableInfo.BulkConfig.SynonymTablePath ?? tableInfo.FullTableName, false);
                 if (isAsync)
                 {
                     await context.Database.ExecuteSqlRawAsync(sqlSetIdentityInsertFalse, cancellationToken).ConfigureAwait(false);
